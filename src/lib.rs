@@ -5,14 +5,15 @@
 //!
 //! ```
 //! // build.rs
+//! #[macro_use]
 //! extern crate cconst;
 //!
 //! use std::net::Ipv4Addr;
 //!
-//! let nameserver = Ipv4Addr::new(8, 8, 8, 8);
-//!
 //! let mut cs = CopyConsts::new();
-//! cs.add_const("default_ns", "::std::net::Ipv4Addr", &nameserver);
+//! cs.add_const("default_ns", "::std::net::Ipv4Addr", {
+//!     Ipv4Addr::new(8, 8, 8, 8)
+//! });
 //! cs.write_code().unwrap();
 //!
 //! ```
@@ -111,7 +112,7 @@ impl CopyConsts {
     ///
     /// Adds a value to be stored as a compile time constant, with an internal
     /// name of `fname`.
-    pub fn add_const<T: Copy>(&mut self, fname: &str, typename: &str, val: &T) {
+    fn add_const<T: Copy>(&mut self, fname: &str, typename: &str, val: &T) {
         self.0
             .insert(fname.to_owned(), create_constant_func(fname, typename, val));
     }
