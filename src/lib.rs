@@ -53,6 +53,14 @@ macro_rules! cconst {
     ($fname:ident) => (concat!(env!("OUT_DIR"), "/cconst-", stringify!($fname), ".rs"))
 }
 
+#[macro_export]
+macro_rules! add_const {
+    ($cconsts:expr, $fname: expr, $ctype:ty, $val:expr) => (
+        let mat: $ctype = $val;
+        $cconsts.add_const($fname, stringify!($ctype), &mat);
+        )
+}
+
 use std::{collections, env, fs, io};
 use std::io::Write;
 use std::mem::size_of;
