@@ -49,6 +49,21 @@
 //! Calling `default_ns()` should result in an inlined pointer cast and little,
 //! if any overhead.
 //!
+//! ## Caveats
+//!
+//! Due to the nature of the code generation used, the type supplied to the
+//! `add_const!`-macro should be fully qualified, i.e. start with a `::`. If
+//! not, it must be visible at the `include!` call site.
+//!
+//! While `Copy` indicates that the type can freely be copied, if any resources
+//! are held by the type outside of what the compiler knows, the type cannot be
+//! compile generated.
+//!
+//! Types that have the same names but are different will result in undefined
+//! behaviour with possibly catastrophic results. This will most likely occur
+//! when the `build_dependencies` and `dependencies` versions of a required
+//! crate differ.
+//!
 //! ## TODO
 //!
 //! [ ] `#[no_std]` support
