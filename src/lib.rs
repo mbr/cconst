@@ -48,12 +48,21 @@
 //!
 //! Calling `default_ns()` should result in an inlined pointer cast and little,
 //! if any overhead.
+//!
+//! ## TODO
+//!
+//! [ ] `#[no_std]` support
 
+/// Imports a stored constant
 #[macro_export]
 macro_rules! cconst {
     ($fname:ident) => (concat!(env!("OUT_DIR"), "/cconst-", stringify!($fname), ".rs"))
 }
 
+/// Creates a constant for inclusion using `cconst!`.
+///
+/// This macro should be preferred over `CopyConsts::add_const`, as it provides
+/// additional type safety.
 #[macro_export]
 macro_rules! add_const {
     ($cconsts:expr, $fname: expr, $ctype:ty, $val:expr) => (
@@ -112,6 +121,10 @@ impl CopyConsts {
     ///
     /// Adds a value to be stored as a compile time constant, with an internal
     /// name of `fname`.
+    ///
+    /// `typename` is required to output generated code, but not checked. For
+    /// this reason using the `add_const!` macro instead of this function
+    /// should be preferred.
     pub fn add_const<T: Copy>(&mut self, fname: &str, typename: &str, val: &T) {
         self.0
             .insert(fname.to_owned(), create_constant_func(fname, typename, val));
