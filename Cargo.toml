@@ -1,6 +1,6 @@
 [package]
 name = "cconst"
-description = "Create compile-time evaluated constants of Copy-traint implementing types"
+description = "Create compile-time evaluated constants of Copy-trait implementing types"
 version = "0.2.1"
 authors = ["Marc Brinkmann <git@marcbrinkmann.de>"]
 license = "MIT"
