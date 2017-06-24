@@ -1,6 +1,10 @@
 [package]
 name = "cconst"
+description = "Create compile-time evaluated constants of Copy-traint implementing types"
 version = "0.2.0"
 authors = ["Marc Brinkmann <git@marcbrinkmann.de>"]
+license = "MIT"
+docs = "https://docs.rs/cconst"
+repository = "https://github.com/mbr/cconst"
 
 [dependencies]
