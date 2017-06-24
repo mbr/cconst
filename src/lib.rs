@@ -112,7 +112,7 @@ impl CopyConsts {
     ///
     /// Adds a value to be stored as a compile time constant, with an internal
     /// name of `fname`.
-    fn add_const<T: Copy>(&mut self, fname: &str, typename: &str, val: &T) {
+    pub fn add_const<T: Copy>(&mut self, fname: &str, typename: &str, val: &T) {
         self.0
             .insert(fname.to_owned(), create_constant_func(fname, typename, val));
     }
