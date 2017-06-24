@@ -66,7 +66,7 @@
 //!
 //! ## TODO
 //!
-//! [ ] `#[no_std]` support
+//! * [ ] `#[no_std]` support
 
 /// Imports a stored constant
 #[macro_export]
